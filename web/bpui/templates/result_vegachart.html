@@ -1,0 +1,6 @@
+{% set div_id = "altair_plot_" ~ result_id %}
+{% set vega_json_url = url_for('.data_export_json', reportid=current.reportid, runid=current.runid, resid=result._id) %}
+<div id="{{ div_id }}"></div>
+<script>
+    vegaEmbed("#{{ div_id }}", "{{ vega_json_url }}");
+</script>

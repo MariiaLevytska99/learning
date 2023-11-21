@@ -1,0 +1,24 @@
+                            <!-- Block Body / INFO BOX -->
+                                <div id="info_{{ result_id }}">
+                                    <div class="panel panel-{{ status_style[result.status] }}" id="panel_info_{{ result_id }}">
+                                        <!-- Block Body / Info / Header -->
+                                        <div class="panel-heading panel-{{ status_style[result.status] }}">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse" data-target="#collapse_info_{{ result_id }}">
+                                                {{ result.title }}{% if result.content %} <small>[details]</small>{% endif %}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <!-- End Block Body / info / Header -->
+                                        {% if result.content is not none %}
+                                        <!-- Block Body / info / Body -->
+                                        <div id="collapse_info_{{ result_id }}" class="panel-body panel-collapse collapse">
+                                            <!-- <div class="panel-body"> -->
+                                            <div>{{ result.content | safe }}</div>
+                                            <!-- </div> -->
+                                        </div>
+                                        <!-- End Block Body / info / Body -->
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- End Block Body / INFO BOX -->

@@ -1,0 +1,77 @@
+{% import 'navbar_macro.html' as navbar %}
+{% set status_style = {constants.NEUTRAL:'default', constants.GOOD:'success', constants.WARNING:'warning', constants.BAD:'danger'} %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- glance version:     {{ version['glance'] }} -->
+    <!-- glance.web version: {{ version['glance-web'] }} -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <!-- BlueYonder UI Kit -->
+    <link href="{{url_for(".static", filename="css/byuikit.standalone.min.css")}}" rel="stylesheet">
+    <script src="{{url_for(".static", filename="js/byuikit.standalone.min.js")}}"></script>
+
+    <!-- bokeh -->
+    <link rel="stylesheet" href="{{url_for(".bokehstatic", filename="css/bokeh.min.css")}}" type="text/css" />
+    <link rel="stylesheet" href="{{url_for(".bokehstatic", filename="css/bokeh-widgets.min.css")}}" type="text/css" />
+    <script type="text/javascript" src="{{url_for(".bokehstatic", filename="js/bokeh.min.js")}}"></script>
+    <script type="text/javascript" src="{{url_for(".bokehstatic", filename="js/bokeh-widgets.min.js")}}"></script>
+
+    <!-- vega, vega-lite, embed -- needed for altair -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+
+    <!-- IFrame Resizer -->
+    <script type="text/javascript" src="{{url_for(".static", filename="js/iframeResizer.contentWindow.min.js")}}"></script>
+
+    <!-- Glance specific -->
+    <link href="{{url_for(".static", filename="css/glance.css")}}" rel="stylesheet">
+    <link href="{{url_for(".static", filename="css/sidebar.css")}}" rel="stylesheet">
+    <script type="text/javascript" src="{{url_for(".static", filename="js/glance_filter.js")}}"></script>
+    <script src="{{ url_for(".static", filename="js/clipboard.min.js")}}"></script>
+	<!--script type="text/javascript" src="{{url_for(".static", filename="js/collapsable_toggle_button.js")}}"></script-->
+	<script type="text/javascript" src="{{url_for(".static", filename="js/sidebar_navigation.js")}}"></script>
+	<script type="text/javascript" src="{{url_for(".static", filename="js/bokeh_plotresult_height_fix.js")}}"></script>
+
+    {% block head %}
+    {% endblock %}
+
+    <title>{% block title %}Glance{% endblock %}</title>
+</head>
+
+<body>
+{% block content %}{% endblock %}
+
+{% block navbar %}{{ navbar.navbar(general, current) }}{% endblock %}
+
+{% if session.CAS_USERNAME is defined %}
+<div class="container"><div class="row"><div class="col-md-12"><span class="small" style="color: #f0f0f0;">
+Logged in as {{ session.CAS_USERNAME }}
+</span></div></div></div>
+{% endif %}
+
+</body>
+
+<script>
+    var clipboard = new Clipboard('.clipboard');
+    clipboard.on('success', function (e) {
+        console.log(e);
+    });
+    clipboard.on('error', function (e) {
+        console.log(e);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function() { $('.tool').tooltip(); });
+{#    $(document).ready(function() { $('.btn').popover(); });#}
+    $(document).ready(function() { $('[rel=tooltip]').tooltip({'placement':'bottom', 'html':true}); });
+</script>
+
+</html>

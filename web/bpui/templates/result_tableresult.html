@@ -1,0 +1,59 @@
+<!-- Block Body / Table -->
+{% if result.format is none %}
+{% set cellformat = '%s' %}
+{% else %}
+{% set cellformat = result.format %}
+{% endif %}
+{% if (result.title is not none) or result.allow_data_export %}
+<div class="panel"><h3>
+    {% if result.title is not none %}<div class="pull-left">{{ result.title }}</div>{%  endif %}
+    {% if result.allow_data_export %}
+    <span class="pull-right">
+        <a style="color: #404040" title="Download data as CSV" href="{{ url_for('.data_export', reportid=current.reportid, runid=current.runid, resid=result._id) }}">
+            <span class="glyphicon glyphicon-save-file" aria-hidden="true"></span>
+        </a>
+        <span title="Copy data to clipboard" class="clipboard" data-clipboard-text='{{ result.export_data().decode('utf8') }}'><span style="color: #404040" class="glyphicon glyphicon-copy" aria-hidden="true"></span></span>
+    </span>
+    {% endif %}
+</h3></div>
+{% endif %}
+{% if result.features == 'none' %}
+{% set tableclass = ' simple' %}
+{% else %}
+{% set tableclass = '' %}
+{% endif %}
+    <table class="table table-striped sortable-theme-bootstrap table-hover table-responsive{{ tableclass }}" data-sortable >
+        <thead>
+            <tr>
+                {% for heading in result.data.columns %}
+                <th>{{heading}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% if result.statustable is none %}
+                {% for rowindex, row in result.data.iterrows() %}
+                <tr>
+                    {% for colindex, cell in row.iteritems() %}
+                    <td>{{ cellformat|format(cell) }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% else %}
+                {% set dtypes = result.data.dtypes %}
+                {% for rowindex, row in result.data.iterrows() %}
+                <tr>
+                    {% for colindex, cell in row.iteritems() %}
+                        <td class="{{ status_style[result.statustable.loc[rowindex, colindex]] }}">
+                        {% set dtype = dtypes.loc[colindex].name %}
+                        {% if dtype.startswith('date') %}{{ cell|datetimeformat }}
+                        {% else %}
+                        {{ cellformat|format(cell) }}
+                        {% endif %}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </tbody>
+    </table>
+<!-- End Block Body / Table -->

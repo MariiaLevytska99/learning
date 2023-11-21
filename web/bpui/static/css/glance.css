@@ -1,0 +1,193 @@
+body {
+    margin: 0;
+    padding-top: 50px;
+}
+
+.tagfilter-group {
+    padding-top: 0px;
+    font-size: 13px;
+    padding-bottom: 1em;
+    position:fixed;
+    float: top ;
+    background-color:rgba(255,255,255,0.9);
+    width: calc(100% - 250px);
+    z-index: 1030;
+    border-bottom: 1px #e5e5e5 solid;
+}
+
+.tagfilter-group-header {
+    float: left ;
+    color: #606060;
+    font-size: 13px;
+    margin-top: 1.15em;
+    padding-right:1em;
+}
+
+
+.filters-button-group {
+    margin-top: 1em;
+}
+
+.header-row {
+    padding-top: 50px;
+}
+
+.dataTables_wrapper {
+    margin-top: 20px;
+}
+
+.whitespace {
+  margin-top: 55px !important;
+}
+
+/* --- reports ------------------------------------------------------------------------------------------------------ */
+
+.report {
+    background-color: #f2f2f2;
+    border: 1px solid #e5e5e5;
+    box-shadow: none;
+    color: #616161;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    max-width: 600px;
+    min-width: 380px;
+    padding: 20px;
+    text-align: left;
+    text-shadow: none;
+    width: auto;
+}
+
+.report-date {
+    float:left;
+    margin-right: 20px;
+    margin-top: -2px;
+    letter-spacing: 1px;
+}
+
+.report-date span {
+    display: block;
+    font-weight:bold;
+    font-style: normal;
+    text-align: center;
+}
+
+.report-date .month {
+    font-size: 10px;
+}
+
+.report-date .day {
+    font-size:18px;
+    line-height:16px;
+}
+
+.report-date .year {
+    font-size: 11px;
+}
+
+/* --- filternumbers ------------------------------------------------------------------------------------------------ */
+
+.filternumber {
+    color: #0198da;
+    background-color: #fff;
+    font-size: 9px;
+    border-radius: 10px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0.8;
+    min-width: 10px;
+    padding: 3px 5px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.filternumber.danger {
+    color: #dd0303;
+}
+.filternumber.warning {
+    color: #f27200;
+}
+.filternumber.success {
+    color: #83b021;
+}
+
+
+/* --- Buttons ------------------------------------------------------------------------------------------------------ */
+#reportTagFilter .btn[data-toggle]:not(.active) {
+    opacity: 0.6;
+}
+
+.badge-danger {
+    background-color: #dd0303 !important;
+}
+
+.badge-warning {
+    background-color: #f27200 !important;
+}
+
+.badge-success {
+    background-color: #83b021 !important;
+}
+
+
+
+.bk-plot-wrapper {
+  overflow: auto;
+}
+
+/* move previous/next buttons closer to their main dropdown button: */
+
+#reports-prev, #runs-prev {
+    margin-right: -20px
+}
+#reports-next, #runs-next {
+    margin-left: -23px;
+}
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -6px;
+    margin-left: -1px;
+    -webkit-border-radius: 0 6px 6px 6px;
+    -moz-border-radius: 0 6px 6px;
+    border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>a:after {
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+}
+
+.dropdown-submenu:hover>a:after {
+    border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+    float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+    left: -100%;
+    margin-left: 10px;
+    -webkit-border-radius: 6px 0 6px 6px;
+    -moz-border-radius: 6px 0 6px 6px;
+    border-radius: 6px 0 6px 6px;
+}

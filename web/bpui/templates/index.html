@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block head %}
+<META HTTP-EQUIV="Refresh" CONTENT="300">
+{{ super() }}
+{% endblock %}
+
+{% block title %}{{ general['name'] }}: Report overview{% endblock %}
+
+
+{% block content %}
+
+<!-- Header Test Set-->
+<div class="container">
+  <div class="row"><div class="col-lg-12"></div><h1 class="page-header">{{ general.name }}</h1></div>
+  {% for groupname in report_groups.keys() %}
+  <!-- GROUP: {{ groupname }} -->
+      {% if groupname %} <div class="row"> <div class="col-lg-12"></div> <h2 class="page-header">{{ groupname }}</h2></div>{% endif %}
+      {% for reportid in report_groups[groupname] %}
+          {% set thisreport = reports[reportid] %}
+          <div class="row">
+              <div class="col-md-8">
+              <div class="panel panel-default">
+                  <div class="panel-body">
+              {% if thisreport.latest is none %}
+                      <span class="">{{ thisreport.shorttitle }}</span>
+                      <span class="text-right"><small>no reports found</small></span>
+              {% else %}
+                  <h5 class="panel-title">
+                  <div class="row">
+                      <a href="{{url_for('.report_page', reportid=reportid, runid='latest') }}">
+                          <div class="col-md-8">{{ thisreport.shorttitle }}</div>
+                      </a>
+                      <div class="col-md-4 text-right">
+                          <a href="{{ url_for('.report_page', reportid=reportid, runid=thisreport['latest']) }}">
+                              <small>{{ thisreport['timestamp'].strftime('%Y-%m-%d %H:%M') }}</small>
+                          </a>
+                          {% for status in [constants.GOOD, constants.WARNING, constants.BAD] %}
+                              {% if (thisreport['status'][status] > 0) %}
+                                  {% set pillclass = 'label' %}
+                              {% else %}
+                                  {% set pillclass = 'alert' %}
+                              {% endif %}
+                              <span class="label {{ pillclass }}-{{ status_style[status] }}">{{ thisreport['status'][status] }}</span>
+                          {% endfor %}
+                      </div>
+                  </div>
+                  </h5>
+                  </a>
+              {% endif %}
+              </div>
+              </div>
+            </div>
+          </div>
+      {% endfor %}
+  {% endfor %}
+</div>
+
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}

@@ -1,0 +1,16 @@
+{% if result.title %}
+                                            <div class = "caption">
+                                                 <b>{{ result.title }}</b>
+                                            </div>
+{% endif %}
+
+                                           <div class="thumbnail">
+                                                {% if result._pre3 %}
+                                                {%   set url = url_for('.report_resource', reportid=current.reportid, runid=current.runid, filename=result.file) %}
+                                                {% else %}
+                                                {%   set url = url_for('.report_resource', reportid=current.reportid, runid=current.runid, key=result._external, filename=result.filename) %}
+                                                {% endif %}
+                                                <a target="_blank" href="{{ url }}">
+                                                    <img src="{{ url }}">
+                                                </a>
+                                           </div>

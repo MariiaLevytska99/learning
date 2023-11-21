@@ -1,0 +1,26 @@
+                            <!-- Block Body / INFO BOX -->
+                                <div id="info_{{ result_id }}">
+                                    <div class="panel" id="panel_info_{{ result_id }}">
+                                        <!-- Block Body / Info / Header -->
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title rule">
+                                                <div class="rule-title">{{ result.title }}</div>
+                                                <a data-toggle="collapse" data-target="#collapse_{{ result_id }}">
+                                                {% if result.message %}more...{% endif %}
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <!-- End Block Body / info / Header -->
+                                        {% if result.message %}
+                                        <!-- Block Body / info / Body -->
+                                        <div id="collapse_{{ result_id }}" class="panel-collapse collapse">
+                                            <div class="panel-body">
+
+                                                <div class="rule-result">{{ result.message | markdown | safe }}</div>
+                                            </div>
+                                        </div>
+                                        <!-- End Block Body / info / Body -->
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <!-- End Block Body / INFO BOX -->

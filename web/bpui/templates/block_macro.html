@@ -1,0 +1,38 @@
+{% macro display_block(block, section_id, blockwidth, status_style) %}
+    <!-- Column Element  -->
+    <div class="mixin-bottom-margin {{ blockwidth }}">
+        <!-- Block -->
+        <div class="panel panel-default panel-{{ status_style[block.status] }}" id="link__{{ block_id }}">
+            <!-- Block Heading -->
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-target="#collapse-block__{{ block_id }}">
+                        {{ block['title'] }}
+                        {% if block['description'] is not none %} -
+                            {{ block['description'] }}{% endif %}
+                        {#                                <a href="{{block['link']}}"><small>[show details]</small></a>#}
+                    </a>
+                </h4>
+            </div>
+            <!-- End Block Heading -->
+
+            <!-- Block Body -->
+            <div id="collapse-block__{{ block_id }}" class="panel-collapse collapse{% if block['do_inflate'] %} in {% endif %}">
+                {# panel-body is a separate div inside the collapsing div because otherwise the collapse animation is jumpy: https://github.com/twbs/bootstrap/issues/12093#issuecomment-41263585 #}
+                <div class="panel-body" style="padding-bottom: 0px">
+                    {# remove padding since the last result already has a 15px margin #}
+                    {% for result in block.results %}
+                        <div class="mixin-result-margins">
+                            {% set result_loop = loop %}
+                            {% set result_id = block_id ~ '_' ~ loop.index %}
+                            {% include 'result_' ~ (result.type | lower) ~ '.html' %}
+                        </div>
+                    {% endfor %} {# loop over results #}
+                </div>
+                <!-- End Block Body -->
+            </div>
+            <!-- End Block Body -->
+        </div>
+        <!-- End Column Element -->
+    </div>
+{% endmacro %}

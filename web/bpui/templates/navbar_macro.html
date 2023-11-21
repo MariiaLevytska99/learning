@@ -1,0 +1,117 @@
+{% macro listnav(id, data, curindex, groups='') %}
+    {# set up left arrow #}
+    {% if curindex == 0 %}
+        {% set disabled = ' disabled' %}
+        {% set link_url = '#' %}
+        {% set tooltip = '' %}
+    {% else %}
+        {% set disabled = '' %}
+        {% set link_url = data[curindex - 1].url %}
+        {% set tooltip = 'rel="tooltip" data-original-title="<nobr>' ~ data[curindex - 1].label ~ '</nobr>"' %}
+    {% endif %}
+    <li class="previous{{ disabled }}">
+        <a id="{{ id ~ '-prev' }}" href="{{ link_url }}">
+            <span {{ tooltip|safe }} class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+    </li>
+    <li class="dropdown">
+        <a aria-expanded="true" role="button" data-toggle="dropdown" class="dropdown-toggle" href="#">{{ data[curindex].label }} <span class="caret"></span></a>
+        <ul role="menu" class="dropdown-menu">
+        {% if groups %}
+            {% for groupname, group_reports in groups.items() %}
+                {% if groupname %}
+                    <li class="dropdown-submenu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ groupname }}</a>
+                    <ul class="dropdown-menu">
+                        {% for reportid in group_reports %}
+                            {% for item in data %}
+                                <!-- is "{{ reportid }}" == "{{ item.reportid }}" -->
+                                {% if reportid == item.reportid %}
+                                <li><a href="{{ data[loop.index0].url }}">{{ item.shorttitle }}
+                                    {%- if loop.index0 == curindex %} <span class="glyphicon glyphicon-ok"></span>{% endif %}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </ul>
+                    </li>
+                {% else %}
+                    {% for reportid in group_reports %}
+                        {% for item in data %}
+                            <!-- is "{{ reportid }}" == "{{ item.reportid }}" -->
+                            {% if reportid == item.reportid %}
+                            <li><a href="{{ data[loop.index0].url }}">{{ data[loop.index0].label }}
+                                {%- if loop.index0 == curindex %} <span class="glyphicon glyphicon-ok"></span>{% endif %}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% else %}
+                    {% for item in data %}
+                    <li><a href="{{ data[loop.index0].url }}">{{ data[loop.index0].label }}
+                        {%- if loop.index0 == curindex %} <span class="glyphicon glyphicon-ok"></span>{% endif %}</a></li>
+                    {% endfor %}
+        {% endif %}
+        </ul>
+    </li>
+
+    {# set up right arrow #}
+    {% if curindex == (data|length - 1) %}
+        {% set disabled = ' disabled' %}
+        {% set link_url = '#' %}
+        {% set tooltip = '' %}
+    {% else %}
+        {% set disabled = '' %}
+        {% set link_url = data[curindex + 1].url %}
+        {% set tooltip = 'rel="tooltip" data-original-title="<nobr>' ~ data[curindex + 1].label ~ '</nobr>"' %}
+    {% endif %}
+    <li class="previous{{ disabled }}">
+        <a id="{{ id ~ '-next' }}" href="{{ link_url }}">
+            <span {{ tooltip|safe }} class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+    </li>
+{% endmacro %}
+{% macro navbar(general, current) -%}
+ <!-- Navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+<div class="container-fluid">
+<div class="navbar-header">
+    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{{ url_for('.index') }}">{{ general.name }}</a>
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+
+        <!-- End Navbar Header -->
+<!-- {{ current.report_groups }} -->
+{{ listnav('reports', current.reportnavdata, current.reportindex, current.report_groups) }}
+{{ listnav('runs', current.runnavdata, current.runindex) }}
+        <script>
+            $("body").keydown(function (e) {
+                if (e.which == 33) { $("#reports-prev")[0].click(); } // pgup
+                else if (e.which == 34) { $("#reports-next")[0].click(); } // pgdown
+                else if (e.which == 37) { $("#runs-prev")[0].click(); } // left
+                else if (e.which == 39) { $("#runs-next")[0].click(); } // right             }
+            });
+        </script>
+
+{% if current.blockindex is not none %}
+{{ listnav('blocks', current.blocknavdata, current.blockindex) }}
+    <script>
+        $("body").keydown(function (e) {
+            if (e.which == 38) { $("#blocks-prev")[0].click(); } // pgup
+            else if (e.which == 40) { $("#blocks-next")[0].click(); } // pgdown
+        });
+    </script>
+{% endif %}
+</ul>
+</div>
+</div>
+</nav>
+<!-- End Navbar -->
+{%- endmacro %}
