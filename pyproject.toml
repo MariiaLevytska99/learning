@@ -1,0 +1,53 @@
+[tool.poetry]
+name = "lp-glance"
+version = "0.0.0"
+description = "The glance  repo"
+
+[tool.poetry.dependencies]
+python = "~3.10"
+Authlib = "^1.0.0"
+pydantic = "1.9.2"
+requests = "^2.25.1"
+rich = "^11.1.0"
+click = "^8.1.2"
+more-itertools = "^8.8.0"
+cachetools = "^5.2.0"
+structlog = "^21.1.0"
+python-json-logger = "^2.0.1"
+networkx = "^2.7.1"
+PyYAML = "^6.0.0"
+toolz = "^0.11.1"
+azure-identity = "^1.10.0"
+azure-keyvault-secrets = "^4.4.0"
+azure-core = "^1.24.0"
+azure-keyvault = "^4.1.0"
+azure-storage-blob = "^12.12.0"
+textual = "^0.1.16"
+azure-storage-file-share = "^12.7.0"
+GitPython = "^3.1.26"
+urllib3 = "1.26.15"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+datamodel-code-generator = {extras = ["http"], version = "^0.12.0"}
+ipython = "^8.2.0"
+pytest-cov = "^2.12.1"
+requests-mock = "^1.9.3"
+rope = "^1.0.0"
+pytest-mock = "^3.7.0"
+pre-commit = "^2.18.1"
+
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pyright]
+reportMissingImports = false # Done via flake8
+reportMissingTypeStubs = false
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
