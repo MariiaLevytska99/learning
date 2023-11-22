@@ -4,7 +4,7 @@
 name = "glance_plugins"
 version = "0.2.11"
 description = "glance_plugins package"
-authors = [""Mariia Levtska mariia.levytska99@mail.com""]
+authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
 
 [tool.poetry]
 python = "^3.8"

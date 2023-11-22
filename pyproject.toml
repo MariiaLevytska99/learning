@@ -8,7 +8,7 @@ build-backend = "poetry.core.masonry.api"
 name = "learning_glance"
 version = "0.1.0"
 description = "glance repo"
-authors = ["Mariia Levtska mariia.levytska99@mail.com"]
+authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
