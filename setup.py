@@ -1,4 +1,4 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name='learning',
@@ -7,7 +7,4 @@ setup(
     author='Mariia Levytska',
     author_email='mariia.levytska@mail.com',
     packages=["glance", "glance_web", "glance_plugins"],
-    install_requires=[
-        # Specify any dependencies required by your project
-    ],
 )
