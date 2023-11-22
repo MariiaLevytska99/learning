@@ -1,17 +1,40 @@
-# pyproject.toml
+[tool.poetry]
+name = "learning"
+version = "0.1.0"
+description = "Learning project"
+authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
+packages = [
+    { include = "glance" },
+    { include = "glance_web" },
+    { include = "glance_plugins" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+blinker = "^1.4"
+bokeh = "^2.4.2"
+cachetools = "^4.2.4"
+click = "^7.1.2"
+debtcollector = "^2.2.0"
+Flask = "^1.1.4"
+Flask-Caching = "^1.11.1"
+Flask-Compress = "^1.4.0"
+Flask-Markdown = "^0.3"
+Markdown = "^2.6.11"
+numpy = "^1.22.4"
+pandas = "^1.4.1"
+prometheus-client = "^0.14.1"
+python-magic = "^0.4.24"
+PyYAML = "^6.0"
+requests = "^2.25.0"
+setuptools = "^59.5.0"
+simplekv = "^0.14.1"
+six = "^1.16.0"
+storefact = "^0.10.0"
+tornado = "^6.1"
+typing-extensions = "^4.1.1"
+decorator = "^5.1.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
-name = "learning_glance"
-version = "0.1.0"
-description = "glance repo"
-authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
-
-[tool.poetry.dependencies]
-python = "^3.8"
-
-[tool.poetry.workspaces]
-members = ["glance", "glance_web", "glance_plugins"]

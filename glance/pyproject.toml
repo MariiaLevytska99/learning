@@ -1,15 +1,13 @@
 # glance/pyproject.toml
 
-[package]
+[tool.poetry]
 name = "glance"
 version = "0.13.0"
 description = "glance package"
 authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
 
-[tool.poetry]
-python = "^3.8"
-
 [tool.poetry.dependencies]
+python = "^3.8"
 cachetools = "^4.2.4"
 click = "^7.1.2"
 debtcollector = "^2.2.0"
