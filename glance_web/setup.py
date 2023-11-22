@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='glance_web',
-    version='0.10.4',
+    version='0.0.1',
     description='glance_web package',
     author='Mariia Levytska',
     author_email='mariia.leytska@mail.com',
