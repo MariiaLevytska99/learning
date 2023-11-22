@@ -4,7 +4,6 @@
 name = "glance"
 version = "0.13.0"
 description = "glance package"
-authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

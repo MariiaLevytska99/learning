@@ -1,10 +1,9 @@
-# glance_web/pyproject.toml
+pyproject.toml files inside # glance_web/pyproject.toml
 
 [package]
 name = "glance_web"
 version = "0.10.4"
 description = "glance_web package"
-authors = ["Mariia Levtska <mariia.levytska99@mail.com>"]
 
 [tool.poetry]
 python = "^3.8"
