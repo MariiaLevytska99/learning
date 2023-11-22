@@ -1,0 +1,17 @@
+# pyproject.toml
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "learning_glance"
+version = "0.1.0"
+description = "glance repo"
+authors = ["Mariia Levtska mariia.levytska99@mail.com"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.workspaces]
+members = ["glance", "glance_web", "glance_plugins"]
